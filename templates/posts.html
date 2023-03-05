@@ -1,0 +1,87 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_tags %}
+
+{% load custom_filters %}
+
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block content %}
+    <h1>All posts</h1>
+
+    {# Добавляем форму, которая объединяет набор полей, которые будут отправляться в запросе #}
+    <form action="" method="get">
+        {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
+        {{ filterset.form.as_p }}
+        {# Добавим кнопку отправки данных формы #}
+        <input type="submit" value="Search"/>
+    </form>
+{#        <br>#}
+{#        <form action="/subscribe-news/" method="get">#}
+{#            <input type="submit" value="Sign up for NEWS"/>#}
+{#        </form>#}
+{#                <form action="/subscribe-articles/" method="get">#}
+{#            <input type="submit" value="Sign up for ARTICLES"/>#}
+{#        </form>#}
+
+    {% if posts %}
+        <h3>Total posts: {{ posts|length }}</h3>
+        <table>
+            <tr>
+                <td>Title</td>
+                <td>Date</td>
+                <td>Description</td>
+            </tr>
+
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.title|censorship }}</td>
+                    <td>{{ post.created_at|date:'d M Y' }}</td>
+                    <td>{{ post.text|truncatechars:20|censorship }}</td>
+                    <td> Rating: {{ post.rating }} </td>
+                    <td> Category:
+                        {% for category in post.category_id.all %}
+                            <a href={% url 'category_posts_list' category.id %}> {{ category }}</a>
+                        {% endfor %} </td>
+{#                    <td><a href="{% url'category_posts_list' category.id %}"?{{ post.get_category_type_display }}</> </td>#}
+                </tr>
+
+                {#                <td>#}
+                {#                     А здесь доступ для каждой ссылки теперь будем проверять отдельно #}
+                {#                    {% if perms.simpleapp.change_product %}#}
+                {#                        <a href="{% url 'news_post_update' pk=product.id %}">Edit</a>#}
+                {#                    {% endif %}#}
+                {#                    {% if perms.simpleapp.delete_product %}#}
+                {#                        <a href="{% url 'news_post_delete' product.id %}">Delete</a>#}
+                {#                    {% endif %}#}
+                {#                </td>#}
+            {% endfor %}
+
+
+    {% else %}
+        <h2>No topics available</h2>
+
+    {% endif %}
+
+    {% if page_obj.has_previous %}
+        <a href="?{% url_replace page=1 %}">1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            ...
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+    {% endif %}
+
+    {# current page info #}
+    {{ page_obj.number }}
+
+    {# next pages info #}
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+
+{% endblock content %}

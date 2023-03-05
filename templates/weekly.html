@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello again! Your weekly list is down here:</h1>
+
+<ul>
+
+    {% for post in posts %}
+    <li><a href="{{ url }}{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+    {% endfor %}
+
+</ul>
+
+</body>
+</html>

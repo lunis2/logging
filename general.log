@@ -1,0 +1,11 @@
+2023-03-05 14:10:54,520 | INFO | autoreload | Watching for file changes with StatReloader
+2023-03-05 14:11:48,318 | INFO | autoreload | /Users/sergey/Devel/skillfactory/flatpagedemo/djangoProject/settings.py changed, reloading.
+ 2023-03-05 14:17:14,107 INFO autoreload Watching for file changes with StatReloader
+ 2023-03-05 14:19:33,281 INFO autoreload /Users/sergey/Devel/skillfactory/flatpagedemo/djangoProject/settings.py changed, reloading.
+2023-03-05 14:20:18,510 | INFO | autoreload | Watching for file changes with StatReloader
+2023-03-05 14:23:09,530 | INFO | autoreload | /Users/sergey/Devel/skillfactory/flatpagedemo/djangoProject/settings.py changed, reloading.
+ 2023-03-05 14:30:14,325 | INFO | autoreload | Watching for file changes with StatReloader
+ 2023-03-05 14:30:16,817 | INFO | autoreload | Watching for file changes with StatReloader
+ 2023-03-05 14:30:53,113 | INFO | autoreload | /Users/sergey/Devel/skillfactory/flatpagedemo/djangoProject/settings.py changed, reloading.
+ 2023-03-05 14:30:53,382 | INFO | autoreload | Watching for file changes with StatReloader
+ 2023-03-05 14:33:25,586 | INFO | autoreload | /Users/sergey/Devel/skillfactory/flatpagedemo/djangoProject/settings.py changed, reloading.

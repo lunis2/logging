@@ -1,0 +1,75 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_tags %}
+
+{% load custom_filters %}
+
+{% block title %}
+    Search Posts
+{% endblock title %}
+
+{% block content %}
+    <h1>Search posts</h1>
+
+
+    <form action="" method="get">
+
+        {{ filtersearch.form.as_p }}
+
+
+
+
+{#        <label for="datetime">Date:</label>#}
+{#        <input#}
+{#                id="datetime"#}
+{#                type="date"#}
+{#                name="time_picker"#}
+{#                value=""/>#}
+
+ <input type="submit" value="Search"/>
+    </form>
+
+    {% if posts %}
+        <h3>Total posts: {{ posts|length }}</h3>
+        <table>
+            <tr>
+                <td>Title</td>
+                <td>Date</td>
+                <td>Description</td>
+            </tr>
+
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.title|censorship }}</td>
+                    <td>{{ post.created_at|date:'d M Y' }}</td>
+                    <td>{{ post.text|truncatechars:20|censorship }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+
+    {% else %}
+        <h2>No topics available</h2>
+
+    {% endif %}
+
+    {% if page_obj.has_previous %}
+        <a href="?{% url_replace page=1 %}">1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            ...
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+    {% endif %}
+
+    {# current page info #}
+    {{ page_obj.number }}
+
+    {# next pages info #}
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+
+{% endblock content %}

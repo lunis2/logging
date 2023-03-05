@@ -1,0 +1,15 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+    {% if post %}
+        <ul>{{ post.title|censorship }}</ul>
+        <ul>{{ post.created_at|date:'d M Y' }}</ul>
+        <ul>{{ post.text|censorship }}</ul>
+    {% endif %}
+{% endblock content %}
